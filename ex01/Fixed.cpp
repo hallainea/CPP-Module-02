@@ -5,17 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahallain <ahallain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/15 17:35:29 by ahallain          #+#    #+#             */
-/*   Updated: 2021/03/17 16:33:38 by ahallain         ###   ########.fr       */
+/*   Created: 2021/03/19 22:17:05 by ahallain          #+#    #+#             */
+/*   Updated: 2021/03/19 22:42:21 by ahallain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cmath>
 #include "Fixed.hpp"
 
 Fixed::Fixed(void) : i(0)
 {
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const int i) : i(i << Fixed::bits)
+{
+	std::cout << "Integer constructor called" << std::endl;
+}
+
+Fixed::Fixed(const float f) : i(roundf(f * (1 << Fixed::bits)))
+{
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &fixed)
@@ -46,4 +57,22 @@ void Fixed::setRawBits(const int raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 	Fixed::i = raw;
+}
+
+int Fixed::toInt(void) const
+{
+	std::cout << "toInt member function called" << std::endl;
+	return (Fixed::i / (1 << Fixed::bits));
+}
+
+float Fixed::toFloat(void) const
+{
+	std::cout << "toFloat member function called" << std::endl;
+	return (Fixed::i << Fixed::bits);
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixe)
+{
+	out << fixe.toFloat();
+	return (out);
 }
