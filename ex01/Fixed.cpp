@@ -6,7 +6,7 @@
 /*   By: ahallain <ahallain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 22:17:05 by ahallain          #+#    #+#             */
-/*   Updated: 2021/03/19 22:42:21 by ahallain         ###   ########.fr       */
+/*   Updated: 2021/03/20 10:58:54 by ahallain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ void Fixed::setRawBits(const int raw)
 
 int Fixed::toInt(void) const
 {
-	std::cout << "toInt member function called" << std::endl;
-	return (Fixed::i / (1 << Fixed::bits));
+	return (Fixed::i >> Fixed::bits);
 }
 
 float Fixed::toFloat(void) const
 {
-	std::cout << "toFloat member function called" << std::endl;
-	return (Fixed::i << Fixed::bits);
+	return ((float)Fixed::i / (1 << Fixed::bits));
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixe)
