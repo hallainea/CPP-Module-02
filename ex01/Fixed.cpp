@@ -6,7 +6,7 @@
 /*   By: ahallain <ahallain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 22:17:05 by ahallain          #+#    #+#             */
-/*   Updated: 2021/03/20 10:58:54 by ahallain         ###   ########.fr       */
+/*   Updated: 2021/03/20 12:10:39 by ahallain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed &Fixed::operator=(const Fixed &op)
-{
-	std::cout << "Assignation operator called" << std::endl;
-	Fixed::setRawBits(op.getRawBits());
-	return *this;
-}
-
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
@@ -67,6 +60,13 @@ int Fixed::toInt(void) const
 float Fixed::toFloat(void) const
 {
 	return ((float)Fixed::i / (1 << Fixed::bits));
+}
+
+Fixed &Fixed::operator=(const Fixed &op)
+{
+	std::cout << "Assignation operator called" << std::endl;
+	Fixed::setRawBits(op.getRawBits());
+	return (*this);
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &fixe)
